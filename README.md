@@ -1,7 +1,11 @@
+---
+
 # TaxoRAG-MX: Retrieval-Augmented Generation System 
 
 This repository contains the official implementation of the TaxoRAG-MX system, linked to the corresponding research article. It presents a modular Retrieval-Augmented Generation (RAG) architecture specifically designed for the biological domain, with a special emphasis on Mexican fauna. The system is designed to operate locally, allowing for intelligent indexing and querying of private document corpora using vector databases and open-source large language models (LLMs).
 
+---
+---
 ## Architecture and Workflow
 
 The RAG system processes document corpora in text or Markdown format to ground the language model's generated responses strictly in the provided documents. The general workflow consists of three main stages:
@@ -9,7 +13,8 @@ The RAG system processes document corpora in text or Markdown format to ground t
 1. **Indexing:** Ingests local files, and performs processing and precise text segmentation (chunking). Subsequently, it computes semantic vectors (embeddings) and stores them in a local vector database.
 2. **Retrieval:** Upon receiving a user query, the system retrieves the most relevant text chunks based on semantic similarity. This process incorporates lexical and taxonomic enhancements characteristic of the TaxoRAG-MX methodology.
 3. **Generation with Chain of Verification (CoVe):** Constructs the final response employing advanced verification techniques to mitigate hallucinations. The retrieved information is systematically cross-referenced to guarantee biological accuracy and adherence to the original source.
-
+---
+---
 ## Core Technologies
 
 The system integrates the following technologies and frameworks:
@@ -19,7 +24,8 @@ The system integrates the following technologies and frameworks:
 * **Tiktoken:** Employed for precise, token-based document segmentation.
 * **RAGAS:** Integrated into the evaluation scripts to measure system performance using metrics such as *faithfulness*, *answer relevancy*, and *answer correctness*.
 * **LangChain:** Utilized in auxiliary and evaluation scripts for workflow orchestration.
-
+---
+---
 ## Usage Guide
 
 1. **Prerequisites:** Ensure Python (3.10+) is installed. LM Studio must be running locally with the server enabled (default port: `1234`).
@@ -40,7 +46,8 @@ The system integrates the following technologies and frameworks:
    ```bash
    python run_generation_ablations.py
    ```
-
+---
+---
 ## Chain of Verification (CoVe) Methodology
 
 To improve the factual accuracy of the generated responses, the system implements a 4-phase Chain of Verification (CoVe) process. The core system prompts (located in `src/generator.py`) are described below:
@@ -69,6 +76,9 @@ The system synthesizes the final response by cross-referencing the initial draft
 
 > **User:** [Includes the original question, the context, the draft, and the checklist with its answers] \n\n Final Corrected Answer:
 
+---
+---
+
 ### Practical CoVe Example
 
 To illustrate the power of the Chain of Verification in preventing hallucinations, consider the following interaction:
@@ -83,3 +93,5 @@ To illustrate the power of the Chain of Verification in preventing hallucination
    1. *Diet: small fish, worms, and insects.*
    2. *Year declared endangered: There is no information in the context.*
 * **4. Final Response:** "According to the provided documents, the Axolotl's diet consists of small fish, worms, and insects. The texts mention that it is an endangered species, but do not specify the exact year this declaration was made."
+
+---
