@@ -1,4 +1,4 @@
-TaxoRAG-MX: Retrieval-Augmented Generation System
+# TaxoRAG-MX: Retrieval-Augmented Generation System 
 
 This repository contains the official implementation of the TaxoRAG-MX system, linked to the corresponding research article. It presents a modular Retrieval-Augmented Generation (RAG) architecture specifically designed for the biological domain, with a special emphasis on Mexican fauna. The system is designed to operate locally, allowing for intelligent indexing and querying of private document corpora using vector databases and open-source large language models (LLMs).
 
