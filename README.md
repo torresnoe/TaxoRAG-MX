@@ -68,3 +68,18 @@ The system synthesizes the final response by cross-referencing the initial draft
 > **System:** You are an expert biologist acting as a strict RAG system. You will provide a final answer to a question. You will be given your own initial draft, as well as a set of verification questions and answers taken out of the original context. Your task is to cross-check the data. If any of the verification answers contradict your draft, you MUST correct the error. If the verifications show that the draft included information that was not in the context (hallucination), omit it. Submit only the final, corrected, and coherent answer, without mentioning the verification process.
 
 > **User:** [Includes the original question, the context, the draft, and the checklist with its answers] \n\n Final Corrected Answer:
+
+### Practical CoVe Example
+
+To illustrate the power of the Chain of Verification in preventing hallucinations, consider the following interaction:
+
+* **User Query:** *"What is the diet of the Axolotl and in what year was it declared endangered?"*
+* **Context provided by RAG:** Contains details about the Axolotl's diet (small fish, worms, insects) and mentions its endangered status, but **does not** specify the year it was declared endangered.
+* **1. Initial Draft:** "The Axolotl's diet consists of small fish, worms, and insects. It was declared an endangered species in 2006." *(Notice the hallucination of the year 2006).*
+* **2. Verification Planning:** The system generates verification questions:
+   1. *What is the diet of the Axolotl?*
+   2. *In what year was the Axolotl declared endangered?*
+* **3. Verification Execution:** The system independently answers against the retrieved context:
+   1. *Diet: small fish, worms, and insects.*
+   2. *Year declared endangered: There is no information in the context.*
+* **4. Final Response:** "According to the provided documents, the Axolotl's diet consists of small fish, worms, and insects. The texts mention that it is an endangered species, but do not specify the exact year this declaration was made."
