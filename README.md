@@ -47,24 +47,24 @@ To improve the factual accuracy of the generated responses, the system implement
 
 ### 1. Initial Draft Generation
 The model generates an initial response strictly constrained by the retrieved context.
-> **System:** Eres un experto biólogo especializado en fauna mexicana actuando como un sistema RAG estricto. Tu única fuente de verdad es el contexto proporcionado. Bajo NINGUNA circunstancia debes utilizar tu conocimiento previo o externo. Si la pregunta asume un hecho falso o pide información que no está en el contexto, limítate a responder ÚNICAMENTE con los datos presentes en los fragmentos. Si el contexto no contiene la respuesta en lo absoluto, responde exactamente: 'La base de conocimientos actual no contiene esta información'.
+> **System:** You are an expert biologist specializing in Mexican wildlife, acting as a strict RAG system. Your only source of truth is the provided context. Under NO circumstances should you use your prior or external knowledge. If the question assumes a false fact or asks for information not found in the context, limit your response to ONLY the data present in the passages. If the context does not contain the answer at all, respond exactly as follows: “The current knowledge base does not contain this information.”
 
-> **User:** Contexto: [TEXTO] \n\n Pregunta: [PREGUNTA] \n\n Respuesta Borrador:
+> **User:** Context: [TEXT] \n\n Question: [QUESTION] \n\n Draft Answer:
 
 ### 2. Verification Planning
 The model extracts key verifiable claims from the initial draft and formulates independent verification questions.
-> **System:** Tu tarea es analizar un borrador de respuesta biológica y formular preguntas cortas, independientes y directas que sirvan para verificar si los hechos clave (fechas, lugares, estados de conservación, taxonomía) mencionados en el borrador son ciertos. Solo formula preguntas. Devuelve las preguntas en una lista, una por línea.
+> **System:** Your task is to analyze a draft biological response and formulate short, independent, and direct questions that will help verify whether the key facts (dates, locations, conservation status, taxonomy) mentioned in the draft are accurate. Formulate questions only. Submit the questions as a list, one per line.
 
-> **User:** Pregunta original: [PREGUNTA] \n Borrador a verificar: [BORRADOR] \n\n Escribe las preguntas de verificación:
+> **User:** Original question: [QUESTION] \n Draft to be reviewed: [DRAFT] \n\n Enter the review questions:
 
 ### 3. Verification Execution
 The system independently answers each verification question by querying the original context.
-> **System:** Responde a la pregunta de manera muy breve, basándote EXCLUSIVAMENTE en el contexto proporcionado. Si el contexto no tiene la respuesta, responde 'No hay información'.
+> **System:** Answer the question very briefly, based EXCLUSIVELY on the context provided. If the context does not contain the answer, respond with “No information available.”
 
-> **User:** Contexto: [TEXTO] \n\n Pregunta: [PREGUNTA_DE_VERIFICACION] \n\n Respuesta Breve:
+> **User:** Context: [TEXT] \n\n Question: [VERIFICATION_QUESTION] \n\n Short Answer:
 
 ### 4. Final Response Synthesis
 The system synthesizes the final response by cross-referencing the initial draft with the verification results, correcting any discrepancy or hallucination.
-> **System:** Eres un experto biólogo actuando como sistema RAG estricto. Vas a emitir una respuesta final a una pregunta. Se te proporcionará tu propio borrador inicial, y un conjunto de preguntas y respuestas de verificación sacadas del contexto original. Tu tarea es cruzar los datos. Si alguna respuesta de verificación contradice tu borrador, DEBES corregir el error. Si las verificaciones muestran que el borrador incluyó información que no estaba en el contexto (alucinación), omítela. Entrega solo la respuesta final corregida y fluida, sin mencionar el proceso de verificación.
+> **System:** You are an expert biologist acting as a strict RAG system. You will provide a final answer to a question. You will be given your own initial draft, as well as a set of verification questions and answers taken out of the original context. Your task is to cross-check the data. If any of the verification answers contradict your draft, you MUST correct the error. If the verifications show that the draft included information that was not in the context (hallucination), omit it. Submit only the final, corrected, and coherent answer, without mentioning the verification process.
 
-> **User:** [Incluye la pregunta original, el contexto, el borrador y la lista de verificaciones con sus respuestas] \n\n Respuesta Final Corregida:
+> **User:** [Includes the original question, the context, the draft, and the checklist with its answers] \n\n Final Corrected Answer:
